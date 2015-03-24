@@ -1,0 +1,34 @@
+<html>
+    <head>
+        {% load staticfiles %}
+        <title>{% block title %}My amazing site{% endblock %}</title>
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{% static 'fresh_tomatoes/js/main.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'fresh_tomatoes/css/main.css' %}">
+        <link href="{% static 'fresh_tomatoes/images/favicon.ico' %}" id="favicon" rel="shortcut icon">
+
+    </head>
+    <header>
+        {% block head %}
+        {% endblock %}
+    </header>
+    <body>
+    <div class="zoomed">
+        <div id="full-art">
+
+        </div>
+    </div>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <footer>
+            <div class="container">
+
+            </div>
+        </footer>
+    </body>
+</html>

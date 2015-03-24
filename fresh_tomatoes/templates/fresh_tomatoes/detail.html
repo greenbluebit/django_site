@@ -1,0 +1,7 @@
+{{ movie.plot }}
+
+<ul id="people-involved">
+    {% for person in movie.MoviePerson_set.all %}
+        <li> {{ person.first_name</li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,120 @@
+{% extends "fresh_tomatoes/main.html" %}
+
+{% block title %}Fresh Tomatoes - Welcome{% endblock %}
+
+{% block head %}
+    <button class="active movie-btn"> Movies </button>
+    <button class="show-btn"> Shows </button>
+    <input type="text"><button id="search">Search</button>
+{% endblock %}
+{% block content %}
+    <div id="movies">
+        {% if latest_movie_list %}
+               {% for movie in latest_movie_list %}
+
+                        <article class="col-md-6 col-lg-4 movie-tile text-center">
+                            <div id="article" class="{{ movie.title_text }} art">
+                                <img src="{{ movie.poster }}">
+                                <div id="article-content">
+                                   <h1>
+                                        {{ movie.title_text }} - {{ movie.release_date }}
+                                    </h1>
+                                    <div id="art-rate">
+                                        {{ movie.rating }}
+                                    </div>
+                                </div>
+                                <div class="extra">
+                                    <iframe width="260" height="315" src="https://www.youtube.com/embed/{{ movie.trailer_youtube_url }}" frameborder="0" allowfullscreen=""></iframe>
+
+
+                                    <div>
+                                        <h1>{{ movie.title_text }}</h1>
+                                        <p> Grade: {{ movie.rating }}</p>
+                                        <p> Date: {{ movie.release_date }} | Duration: {{ movie.duration }} Min</p>
+                                        <p> Budget: {{ movie.budget }} $</p>
+                                        <p>
+                                            {% if movie.available_imax == True %}
+                                                    <img style="width: auto !important; height: auto !important;" src="http://cdn-img.easyicon.net/png/5288/528833.png">
+                                            {% else %}
+                                                    <img style="width: auto !important; height: auto !important; opacity:0.2;" src="http://cdn-img.easyicon.net/png/5288/528833.png">
+                                            {% endif %}
+                                            {% if movie.available_3d == True %}
+                                                    <img style="width: 32px !important; height: 32px !important;" src="https://imaxmelbourne.com.au/images/site/imax_icon.png">
+                                            {% else %}
+                                                    <img style="width: 32px !important; height: 32px !important; opacity:0.2;" src="https://imaxmelbourne.com.au/images/site/imax_icon.png">
+                                            {% endif %}
+                                        </p>
+                                        <h1>Plot</h1>
+                                        <p> {{ movie.plot }} </p>
+                                        <h1>Trivia</h1>
+                                        <p> {{ movie.trivia }} </p>
+                                        <h1>Goofs</h1>
+                                        <p> {{ movie.goofs }} </p>
+                                        <h1>People Involved</h1>
+                                        <ul>
+                                            {% for person in movie.movieperson_set.all %}
+                                                <li>{{ person.first_name }} {{ person.last_name }} - {{ person.role }}</li>
+                                            {% endfor %}
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </article>
+               {% endfor %}
+
+        {% else %}
+           <p> No Entertainment is available.</p>
+        {% endif %}
+    </div>
+    <div id="shows" class="unseen">
+        {% if latest_shows_list %}
+            {% for show in latest_shows_list %}
+                <article class="col-md-6 col-lg-4 movie-tile text-center">
+                            <div id="article" class="{{ show.title_text }} art">
+                                <img src="{{ show.poster }}">
+                                <div id="article-content">
+                                   <h1>
+                                        {{ show.title_text }} - {{ show.release_date }}
+                                    </h1>
+                                    <div id="art-rate">
+                                        {{ show.rating }}
+                                    </div>
+                                </div>
+                                 <div class="extra">
+                                     <img src="{{ show.poster }}">
+                                     <div>
+                                        <h1>{{ show.title_text }}</h1>
+                                        <p> Grade: {{ show.rating }}</p>
+                                        <p> Date: {{ show.release_date }}</p>
+                                        <p>
+                                            {% if show.available_imax == True %}
+                                                    <img style="width: auto !important; height: auto !important;" src="http://cdn-img.easyicon.net/png/5288/528833.png">
+                                            {% else %}
+                                                    <img style="width: auto !important; height: auto !important; opacity:0.2;" src="http://cdn-img.easyicon.net/png/5288/528833.png">
+                                            {% endif %}
+                                            {% if show.available_3d == True %}
+                                                    <img style="width: 32px !important; height: 32px !important;" src="https://imaxmelbourne.com.au/images/site/imax_icon.png">
+                                            {% else %}
+                                                    <img style="width: 32px !important; height: 32px !important; opacity:0.2;" src="https://imaxmelbourne.com.au/images/site/imax_icon.png">
+                                            {% endif %}
+                                        </p>
+                                        <p> Seasons: {{ show.seasons }}</p>
+                                        <p> Network: {{ show.network }}</p>
+                                        <h1>Plot</h1>
+                                        <p> {{ show.plot }} </p>
+                                        <h1>People Involved</h1>
+                                        <ul>
+                                            {% for person in show.movieperson_set.all %}
+                                                <li>{{ person.first_name }} {{ person.last_name }} - {{ person.role }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                     </div>
+                                 </div>
+                            </div>
+                </article>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
